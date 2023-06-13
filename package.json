@@ -1,0 +1,11 @@
+{
+  "name": "pokebattle-api",
+  "version": "1.0.0",
+  "description": "an api that allowes the user to play pokemon battle using API requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
