@@ -1,16 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Duck Directory API",
-    "description": "Directory containing duck information",
+    "title": "Pokemon Battle API",
+    "description": "API to simulate Pokemon battles.",
     "version": "1.0.0"
   },
-  "host": "duck-directory-api.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "paths": {
     "/api-docs": {
       "get": {
@@ -30,12 +27,10 @@
         }
       }
     },
-    "/ducks/": {
+    "/pokemon/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -47,12 +42,32 @@
         }
       }
     },
-    "/ducks/new": {
+    "/pokemon/{id}": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/pokemon/new": {
       "post": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",
@@ -60,34 +75,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "full_name": {
+                "name": {
                   "example": "any"
                 },
-                "color": {
+                "number": {
                   "example": "any"
                 },
-                "job": {
+                "type": {
                   "example": "any"
                 },
-                "size": {
+                "abilities": {
                   "example": "any"
                 },
-                "material": {
+                "stats": {
                   "example": "any"
                 },
-                "weight": {
+                "evolutions": {
                   "example": "any"
                 },
-                "floatability": {
-                  "example": "any"
-                },
-                "features": {
-                  "example": "any"
-                },
-                "accessories": {
-                  "example": "any"
-                },
-                "fun_fact": {
+                "moves": {
                   "example": "any"
                 }
               }
@@ -107,12 +113,10 @@
         }
       }
     },
-    "/ducks/update/{id}": {
+    "/pokemon/update/{id}": {
       "put": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -126,34 +130,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "full_name": {
+                "name": {
                   "example": "any"
                 },
-                "color": {
+                "number": {
                   "example": "any"
                 },
-                "job": {
+                "type": {
                   "example": "any"
                 },
-                "size": {
+                "abilities": {
                   "example": "any"
                 },
-                "material": {
+                "stats": {
                   "example": "any"
                 },
-                "weight": {
+                "evolutions": {
                   "example": "any"
                 },
-                "floatability": {
-                  "example": "any"
-                },
-                "features": {
-                  "example": "any"
-                },
-                "accessories": {
-                  "example": "any"
-                },
-                "fun_fact": {
+                "moves": {
                   "example": "any"
                 }
               }
@@ -173,12 +168,10 @@
         }
       }
     },
-    "/ducks/delete/{id}": {
+    "/pokemon/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -197,12 +190,10 @@
         }
       }
     },
-    "/hunters/": {
+    "/players/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -214,12 +205,32 @@
         }
       }
     },
-    "/hunters/new": {
+    "/players/{id}": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/players/new": {
       "post": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",
@@ -227,19 +238,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "full_name": {
+                "name": {
                   "example": "any"
                 },
-                "occupation": {
+                "number": {
                   "example": "any"
                 },
-                "experience": {
+                "type": {
                   "example": "any"
                 },
-                "equipment": {
+                "abilities": {
                   "example": "any"
                 },
-                "skills": {
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
                   "example": "any"
                 }
               }
@@ -259,12 +276,10 @@
         }
       }
     },
-    "/hunters/update/{id}": {
+    "/players/update/{id}": {
       "put": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -278,19 +293,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "full_name": {
+                "name": {
                   "example": "any"
                 },
-                "occupation": {
+                "number": {
                   "example": "any"
                 },
-                "experience": {
+                "type": {
                   "example": "any"
                 },
-                "equipment": {
+                "abilities": {
                   "example": "any"
                 },
-                "skills": {
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
                   "example": "any"
                 }
               }
@@ -310,12 +331,499 @@
         }
       }
     },
-    "/hunters/delete/{id}": {
+    "/players/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": [
-          "application/json"
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/benches/": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/benches/{id}": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/benches/new": {
+      "post": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/benches/update/{id}": {
+      "put": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/benches/delete/{id}": {
+      "delete": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stadiums/": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stadiums/{id}": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/stadiums/new": {
+      "post": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stadiums/update/{id}": {
+      "put": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stadiums/delete/{id}": {
+      "delete": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/battles/": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/battles/{id}": {
+      "get": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/battles/new": {
+      "post": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/battles/update/{id}": {
+      "put": {
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "number": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "abilities": {
+                  "example": "any"
+                },
+                "stats": {
+                  "example": "any"
+                },
+                "evolutions": {
+                  "example": "any"
+                },
+                "moves": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/battles/delete/{id}": {
+      "delete": {
+        "description": "",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",

@@ -12,8 +12,8 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.secret,
-  baseURL: "https://duck-directory-api.onrender.com/",
-  clientID: "v9EMKJY95JYvlVb8UvH9UBmniMUSSSbn",
+  baseURL: "http://localhost:3000",
+  clientID: "mp8Z9YgtQeHbhHmga8RoW4dpWOH6gcUa",
   issuerBaseURL: "https://dev-ysgqikzna2aqfoi7.us.auth0.com",
 };
 

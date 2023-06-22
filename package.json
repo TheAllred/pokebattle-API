@@ -1,7 +1,7 @@
 {
-  "name": "duck-directory",
+  "name": "poke-battle-api",
   "version": "1.0.0",
-  "description": "rest api for the storage and serving of duck contact information",
+  "description": "rest api for the playing of a mock pokemon battle",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",

@@ -2,8 +2,8 @@ const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
   info: {
-    title: "Duck Directory API",
-    description: "Directory containing duck information",
+    title: "Pokemon Battle API",
+    description: "API to simulate Pokemon battles.",
   },
   host: "duck-directory-api.onrender.com",
   schemes: ["http", "https"],

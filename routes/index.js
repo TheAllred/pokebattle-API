@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-router.use("/ducks", require("./ducks"));
-router.use("/hunters", require("./hunters"));
+
+router.use("/pokemon", require("./pokemon"));
+router.use("/players", require("./players"));
+router.use("/benches", require("./benches"));
+router.use("/stadiums", require("./stadiums"));
+router.use("/battles", require("./battles"));
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger-output.json");
