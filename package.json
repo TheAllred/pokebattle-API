@@ -1,11 +1,24 @@
 {
-  "name": "pokebattle-api",
+  "name": "duck-directory",
   "version": "1.0.0",
-  "description": "an api that allowes the user to play pokemon battle using API requests",
+  "description": "rest api for the storage and serving of duck contact information",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Kevin Allred",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.16.0",
+    "mongodb": "^5.5.0",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "swagger-autogen": "^2.23.1"
+  }
 }
