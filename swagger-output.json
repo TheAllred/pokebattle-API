@@ -5,7 +5,7 @@
     "description": "API to simulate Pokemon battles.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://pokebattleapi.onrender.com",
   "basePath": "/",
   "schemes": ["http", "https"],
   "paths": {
