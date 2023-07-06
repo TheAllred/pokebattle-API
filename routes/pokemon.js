@@ -4,7 +4,7 @@ const router = express.Router();
 const pokemonController = require("../controllers/pokemon");
 
 router.get("/", pokemonController.getAll);
-router.get("/:id", pokemonController.getById);
+router.get("/:name", pokemonController.getByName);
 
 router.post("/new", pokemonController.createNew);
 

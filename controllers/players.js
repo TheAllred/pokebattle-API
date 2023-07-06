@@ -18,7 +18,7 @@ const getById = async (req, res, next) => {
   const result = await mongodb
     .getDb()
     .db()
-    .collection("battles")
+    .collection("players")
     .find({ _id: Id });
 
   const lists = await result.toArray();

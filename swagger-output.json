@@ -5,9 +5,12 @@
     "description": "API to simulate Pokemon battles.",
     "version": "1.0.0"
   },
-  "host": "https://pokebattleapi.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": [
+    "http",
+    "https"
+  ],
   "paths": {
     "/api-docs": {
       "get": {
@@ -30,7 +33,9 @@
     "/pokemon/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -42,13 +47,15 @@
         }
       }
     },
-    "/pokemon/{id}": {
+    "/pokemon/{name}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -67,7 +74,9 @@
     "/pokemon/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -78,22 +87,25 @@
                 "name": {
                   "example": "any"
                 },
-                "number": {
-                  "example": "any"
-                },
                 "type": {
                   "example": "any"
                 },
-                "abilities": {
+                "hp": {
                   "example": "any"
                 },
-                "stats": {
+                "weight": {
                   "example": "any"
                 },
-                "evolutions": {
+                "height": {
                   "example": "any"
                 },
                 "moves": {
+                  "example": "any"
+                },
+                "weaknesses": {
+                  "example": "any"
+                },
+                "resistances": {
                   "example": "any"
                 }
               }
@@ -116,7 +128,9 @@
     "/pokemon/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -133,22 +147,25 @@
                 "name": {
                   "example": "any"
                 },
-                "number": {
-                  "example": "any"
-                },
                 "type": {
                   "example": "any"
                 },
-                "abilities": {
+                "hp": {
                   "example": "any"
                 },
-                "stats": {
+                "weight": {
                   "example": "any"
                 },
-                "evolutions": {
+                "height": {
                   "example": "any"
                 },
                 "moves": {
+                  "example": "any"
+                },
+                "weaknesses": {
+                  "example": "any"
+                },
+                "resistances": {
                   "example": "any"
                 }
               }
@@ -171,7 +188,9 @@
     "/pokemon/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -193,7 +212,9 @@
     "/players/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -208,7 +229,9 @@
     "/players/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -230,7 +253,9 @@
     "/players/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -279,7 +304,9 @@
     "/players/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -334,7 +361,9 @@
     "/players/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -356,7 +385,9 @@
     "/benches/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -371,7 +402,9 @@
     "/benches/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -393,7 +426,6 @@
     "/benches/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",
@@ -401,25 +433,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "pokemon1": {
                   "example": "any"
                 },
-                "number": {
+                "pokemon2": {
                   "example": "any"
                 },
-                "type": {
+                "pokemon3": {
                   "example": "any"
                 },
-                "abilities": {
-                  "example": "any"
-                },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "pokemon4": {
                   "example": "any"
                 }
               }
@@ -427,14 +450,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -442,7 +459,9 @@
     "/benches/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -497,7 +516,9 @@
     "/benches/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -519,7 +540,9 @@
     "/stadiums/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -534,7 +557,9 @@
     "/stadiums/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -556,7 +581,9 @@
     "/stadiums/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -605,7 +632,9 @@
     "/stadiums/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -660,7 +689,9 @@
     "/stadiums/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -682,7 +713,9 @@
     "/battles/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -697,7 +730,9 @@
     "/battles/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -719,7 +754,9 @@
     "/battles/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -768,7 +805,9 @@
     "/battles/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -823,7 +862,9 @@
     "/battles/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",

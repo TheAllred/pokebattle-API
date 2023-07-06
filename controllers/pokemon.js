@@ -5,21 +5,23 @@ const getAll = async (req, res, next) => {
   try {
     const result = await mongodb.getDb().db().collection("pokemon").find();
     const lists = await result.toArray();
+    console.log(result);
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
+    return;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to get all pokemon." });
   }
 };
 
-const getById = async (req, res, next) => {
-  const Id = new ObjectId(req.params.id);
+const getByName = async (req, res, next) => {
+  const name = new ObjectId(req.params.name);
   const result = await mongodb
     .getDb()
     .db()
-    .collection("battles")
-    .find({ _id: Id });
+    .collection("pokemon")
+    .find({ name: name });
 
   const lists = await result.toArray();
   res.setHeader("Content-Type", "application/json");
@@ -34,21 +36,23 @@ const getById = async (req, res, next) => {
 const createNew = async (req, res, next) => {
   const newPokemon = {
     name: req.body.name,
-    number: req.body.number,
     type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
+    hp: req.body.hp,
+    weight: req.body.weight,
+    height: req.body.height,
     moves: req.body.moves,
+    weaknesses: req.body.weaknesses,
+    resistances: req.body.resistances,
   };
   if (
     !req.body.name ||
-    !req.body.number ||
     !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
+    !req.body.hp ||
+    !req.body.weight ||
+    !req.body.height ||
+    !req.body.moves ||
+    !req.body.weaknesses ||
+    !req.body.resistances
   ) {
     res.status(400).json({ message: "Incomplete pokemon." });
   } else {
@@ -76,21 +80,23 @@ const createNew = async (req, res, next) => {
 const updatePokemon = async (req, res, next) => {
   const updatedPokemon = {
     name: req.body.name,
-    number: req.body.number,
     type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
+    hp: req.body.hp,
+    weight: req.body.weight,
+    height: req.body.height,
     moves: req.body.moves,
+    weaknesses: req.body.weaknesses,
+    resistances: req.body.resistances,
   };
   if (
     !req.body.name ||
-    !req.body.number ||
     !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
+    !req.body.hp ||
+    !req.body.weight ||
+    !req.body.height ||
+    !req.body.moves ||
+    !req.body.weaknesses ||
+    !req.body.resistances
   ) {
     res.status(400).json({ message: "Incomplete pokemon." });
   } else {
@@ -131,4 +137,4 @@ const deletePokemon = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, createNew, updatePokemon, deletePokemon };
+module.exports = { getAll, getByName, createNew, updatePokemon, deletePokemon };

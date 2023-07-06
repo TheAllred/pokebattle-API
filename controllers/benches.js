@@ -32,23 +32,32 @@ const getById = async (req, res, next) => {
 };
 
 const createNew = async (req, res, next) => {
+  const result = await mongodb.getDb().db().collection("pokemon").find();
+  const pokemon = await result.toArray();
+  // // {
+  //   "pokemon1": "Pikachu",
+  //   "pokemon2": "Zapdos",
+  //   "pokemon3": "Charizard",
+  //   "pokemon4": "Leafeon"
+  // }
+
   const newBench = {
-    name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+    owner: req.oidc.user.email,
+    inPlay: false,
+    bench: {
+      pokemon1: pokemon.find((pokemon) => pokemon.name === req.body.pokemon1),
+      pokemon2: pokemon.find((pokemon) => pokemon.name === req.body.pokemon2),
+      pokemon3: pokemon.find((pokemon) => pokemon.name === req.body.pokemon3),
+      pokemon4: pokemon.find((pokemon) => pokemon.name === req.body.pokemon4),
+    },
   };
+  console.log(newBench);
   if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
+    !newBench.bench.pokemon1 ||
+    !newBench.bench.pokemon2 ||
+    !newBench.bench.pokemon3 ||
+    !newBench.bench.pokemon4 ||
+    !req.oidc.user.email
   ) {
     res.status(400).json({ message: "Incomplete benches." });
   } else {
@@ -75,24 +84,23 @@ const createNew = async (req, res, next) => {
 
 const updateBench = async (req, res, next) => {
   const updatedBench = {
-    name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+    owner: req.oidc.user.email,
+    inPlay: false,
+    bench: {
+      pokemon1: pokemon.find((pokemon) => pokemon.name === req.body.pokemon1),
+      pokemon2: pokemon.find((pokemon) => pokemon.name === req.body.pokemon2),
+      pokemon3: pokemon.find((pokemon) => pokemon.name === req.body.pokemon3),
+      pokemon4: pokemon.find((pokemon) => pokemon.name === req.body.pokemon4),
+    },
   };
   if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
+    !newBench.bench.pokemon1 ||
+    !newBench.bench.pokemon2 ||
+    !newBench.bench.pokemon3 ||
+    !newBench.bench.pokemon4 ||
+    !req.oidc.user.email
   ) {
-    res.status(400).json({ message: "Incomplete benches." });
+    res.status(400).json({ message: "Incomplete bench." });
   } else {
     try {
       const BenchId = new ObjectId(req.params.id);

@@ -12,14 +12,14 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.secret,
-  baseURL: "https://pokebattleapi.onrender.com/",
+  baseURL: "http://localhost:3000",
   clientID: "mp8Z9YgtQeHbhHmga8RoW4dpWOH6gcUa",
   issuerBaseURL: "https://dev-ysgqikzna2aqfoi7.us.auth0.com",
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
-
+console.log(process.env.baseURL);
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
