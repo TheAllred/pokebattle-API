@@ -18,7 +18,7 @@ const getById = async (req, res, next) => {
   const result = await mongodb
     .getDb()
     .db()
-    .collection("battles")
+    .collection("battle")
     .find({ _id: Id });
 
   const lists = await result.toArray();
@@ -56,7 +56,7 @@ const createNew = async (req, res, next) => {
       const response = await mongodb
         .getDb()
         .db()
-        .collection("battles")
+        .collection("battle")
         .insertOne(newBattle);
       if (response.acknowledged) {
         res.setHeader("Content-Type", "application/json");
@@ -73,24 +73,125 @@ const createNew = async (req, res, next) => {
   }
 };
 
-const updateBattle = async (req, res, next) => {
-  const updatedBattle = {
-    name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+const startNewBattle = async (req, res, next) => {
+  const player1_bench_ID = new ObjectId(req.body.P1BenchID);
+  const player2_bench_ID = new ObjectId(req.body.P2BenchID);
+  const player1_bench_raw = await mongodb
+    .getDb()
+    .db()
+    .collection("benches")
+    .find({ _id: player1_bench_ID });
+  console.log(player1_bench_ID);
+  console.log(player2_bench_ID);
+  const player1_bench = await player1_bench_raw.toArray();
+  const player2_bench_raw = await mongodb
+    .getDb()
+    .db()
+    .collection("benches")
+    .find({ _id: player2_bench_ID });
+  const player2_bench = await player2_bench_raw.toArray();
+  let stadiumId = new ObjectId(req.body.stadium);
+
+  const stadium = await mongodb
+    .getDb()
+    .db()
+    .collection("stadium")
+    .find({ _id: stadiumId });
+  const newBattle = {
+    player1: req.oidc.user.email,
+    player2: req.body.opponent,
+    player1_bench: player1_bench[0],
+    player2_bench: player2_bench[0],
+    turn: req.body.opponent,
+    stadium: stadium,
   };
   if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
+    !req.oidc.user.email ||
+    !req.body.opponent ||
+    !player1_bench[0] ||
+    !player2_bench[0] ||
+    !req.body.opponent ||
+    !stadium
+  ) {
+    res.status(400).json({ message: "Incomplete battle." });
+  } else {
+    try {
+      const response = await mongodb
+        .getDb()
+        .db()
+        .collection("battle")
+        .insertOne(newBattle);
+      if (response.acknowledged) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(201).json(response);
+      } else {
+        res
+          .status(500)
+          .json(response.error || "Error occurred while creating new battle.");
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Failed to create battle." });
+    }
+  }
+};
+
+const listTurn = async (req, res) => {
+  const battleID = new ObjectId(req.params.battleID);
+  const DBresult = await mongodb
+    .getDb()
+    .db()
+    .collection("battle")
+    .find({ _id: battleID });
+  const DBList = await DBresult.toArray();
+  let battle = DBList[0];
+  console.log(battle.turn);
+  console.log(req.oidc.user.email);
+  if (battle.turn != req.oidc.user.email) {
+    res.status(500).json({ message: "Its not your turn!" });
+  } else {
+    let myBench = {};
+    console.log(battle.player1_bench.owner);
+    console.log(battle.player2_bench.owner);
+    if (battle.player1_bench.owner === req.oidc.user.email) {
+      myBench = battle.player1_bench;
+    } else if (battle.player2_bench.owner === req.oidc.user.email) {
+      myBench = battle.player2_bench;
+    }
+    console.log(myBench);
+    if (myBench) {
+      let moves = {
+        Run: "Run",
+        SwitchStadium: "Swap Stadium",
+        // Attack: myBench.bench[0].moves,
+      };
+      res.status(200).json(moves);
+    } else {
+      res.status(500).json({ error: "something went wrong!" });
+    }
+  }
+};
+
+const executeTurn = async (req, res) => {
+  const battleID = new ObjectId(req.params.battleID);
+};
+
+const updateBattle = async (req, res, next) => {
+  const updatedBattle = {
+    player1: req.body.me,
+    player2: req.body.opponent,
+    player1_bench: player1_bench[0],
+    player2_bench: player2_bench[0],
+    turn: req.body.opponent,
+    stadium: stadium,
+  };
+  if (
+    !req.body.me ||
+    !req.body.opponent ||
+    !player1_bench[0] ||
+    !player2_bench[0] ||
+    !req.body.opponent ||
+    !stadium
   ) {
     res.status(400).json({ message: "Incomplete battle." });
   } else {
@@ -99,7 +200,7 @@ const updateBattle = async (req, res, next) => {
       const response = await mongodb
         .getDb()
         .db()
-        .collection("battles")
+        .collection("battle")
         .replaceOne({ _id: battleId }, updatedBattle);
       if (response.acknowledged) {
         res.setHeader("Content-Type", "application/json");
@@ -118,7 +219,7 @@ const deleteBattle = async (req, res, next) => {
     const response = await mongodb
       .getDb()
       .db()
-      .collection("battles")
+      .collection("battle")
       .deleteOne({ _id: battleId });
     if (response.acknowledged) {
       res.setHeader("Content-Type", "application/json");
@@ -131,4 +232,13 @@ const deleteBattle = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, createNew, updateBattle, deleteBattle };
+module.exports = {
+  getAll,
+  getById,
+  createNew,
+  updateBattle,
+  deleteBattle,
+  startNewBattle,
+  listTurn,
+  executeTurn,
+};

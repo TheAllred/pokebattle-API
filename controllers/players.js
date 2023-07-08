@@ -31,67 +31,13 @@ const getById = async (req, res, next) => {
   }
 };
 
-const createNew = async (req, res, next) => {
-  const newPlayer = {
-    name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
-  };
-  if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
-  ) {
-    res.status(400).json({ message: "Incomplete player." });
-  } else {
-    try {
-      const response = await mongodb
-        .getDb()
-        .db()
-        .collection("player")
-        .insertOne(newPlayer);
-      if (response.acknowledged) {
-        res.setHeader("Content-Type", "application/json");
-        res.status(201).json(response);
-      } else {
-        res
-          .status(500)
-          .json(response.error || "Error occurred while creating new player.");
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Failed to create player." });
-    }
-  }
-};
-
 const updatePlayer = async (req, res, next) => {
   const updatedPlayer = {
     name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+    picture: req.body.picture,
+    email: req.body.email,
   };
-  if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
-  ) {
+  if (!req.body.name || !req.body.picture || !req.body.email) {
     res.status(400).json({ message: "Incomplete player." });
   } else {
     try {
@@ -131,4 +77,55 @@ const deletePlayer = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, createNew, updatePlayer, deletePlayer };
+const buildProfile = async (req, res) => {
+  let user = {};
+  user = req.oidc.user;
+  console.log(user);
+  if (user.email) {
+    console.log(user.email);
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection("player")
+      .find({ email: user.email });
+    // console.log(result);
+    const lists = await result.toArray();
+    console.log(lists);
+
+    const profile = lists[0];
+    if (profile) {
+      res.send(JSON.stringify(profile));
+    } else {
+      try {
+        const response = await mongodb
+          .getDb()
+          .db()
+          .collection("player")
+          .insertOne(req.oidc.user);
+        if (response.acknowledged) {
+          res.setHeader("Content-Type", "application/json");
+          res.status(201).json(response);
+        } else {
+          res
+            .status(500)
+            .json(
+              response.error || "Error occurred while creating new player."
+            );
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to create player." });
+      }
+    }
+  } else {
+    res.redirect("/");
+  }
+};
+
+module.exports = {
+  getAll,
+  getById,
+  updatePlayer,
+  deletePlayer,
+  buildProfile,
+};

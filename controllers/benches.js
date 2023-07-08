@@ -18,7 +18,7 @@ const getById = async (req, res, next) => {
   const result = await mongodb
     .getDb()
     .db()
-    .collection("battles")
+    .collection("benches")
     .find({ _id: Id });
 
   const lists = await result.toArray();
@@ -31,10 +31,28 @@ const getById = async (req, res, next) => {
   }
 };
 
+const getBenchByOwner = async (req, res, next) => {
+  const email = req.params.email;
+  console.log(email);
+  const result = await mongodb
+    .getDb()
+    .db()
+    .collection("benches")
+    .find({ owner: email });
+
+  const lists = await result.toArray();
+  res.setHeader("Content-Type", "application/json");
+  if (lists[0]) {
+    res.status(200).json(lists);
+  } else {
+    res.sendStatus(404);
+  }
+};
+
 const createNew = async (req, res, next) => {
   const result = await mongodb.getDb().db().collection("pokemon").find();
   const pokemon = await result.toArray();
-  // // {
+  // {
   //   "pokemon1": "Pikachu",
   //   "pokemon2": "Zapdos",
   //   "pokemon3": "Charizard",
@@ -43,20 +61,19 @@ const createNew = async (req, res, next) => {
 
   const newBench = {
     owner: req.oidc.user.email,
-    inPlay: false,
-    bench: {
-      pokemon1: pokemon.find((pokemon) => pokemon.name === req.body.pokemon1),
-      pokemon2: pokemon.find((pokemon) => pokemon.name === req.body.pokemon2),
-      pokemon3: pokemon.find((pokemon) => pokemon.name === req.body.pokemon3),
-      pokemon4: pokemon.find((pokemon) => pokemon.name === req.body.pokemon4),
-    },
+    bench: [
+      pokemon.find((pokemon) => pokemon.name === req.body.pokemon1),
+      pokemon.find((pokemon) => pokemon.name === req.body.pokemon2),
+      pokemon.find((pokemon) => pokemon.name === req.body.pokemon3),
+      pokemon.find((pokemon) => pokemon.name === req.body.pokemon4),
+    ],
   };
   console.log(newBench);
   if (
-    !newBench.bench.pokemon1 ||
-    !newBench.bench.pokemon2 ||
-    !newBench.bench.pokemon3 ||
-    !newBench.bench.pokemon4 ||
+    !newBench.bench[0] ||
+    !newBench.bench[1] ||
+    !newBench.bench[2] ||
+    !newBench.bench[3] ||
     !req.oidc.user.email
   ) {
     res.status(400).json({ message: "Incomplete benches." });
@@ -85,7 +102,7 @@ const createNew = async (req, res, next) => {
 const updateBench = async (req, res, next) => {
   const updatedBench = {
     owner: req.oidc.user.email,
-    inPlay: false,
+    inPlay: req.body.inPlay,
     bench: {
       pokemon1: pokemon.find((pokemon) => pokemon.name === req.body.pokemon1),
       pokemon2: pokemon.find((pokemon) => pokemon.name === req.body.pokemon2),
@@ -98,7 +115,8 @@ const updateBench = async (req, res, next) => {
     !newBench.bench.pokemon2 ||
     !newBench.bench.pokemon3 ||
     !newBench.bench.pokemon4 ||
-    !req.oidc.user.email
+    !req.oidc.user.email ||
+    !req.oidc.user.inPlay
   ) {
     res.status(400).json({ message: "Incomplete bench." });
   } else {
@@ -139,4 +157,11 @@ const deleteBench = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, createNew, updateBench, deleteBench };
+module.exports = {
+  getAll,
+  getById,
+  createNew,
+  updateBench,
+  deleteBench,
+  getBenchByOwner,
+};

@@ -3,7 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await mongodb.getDb().db().collection("stadiums").find();
+    const result = await mongodb.getDb().db().collection("stadium").find();
     const lists = await result.toArray();
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
@@ -34,29 +34,20 @@ const getById = async (req, res, next) => {
 const createNew = async (req, res, next) => {
   const newStadium = {
     name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+    description: req.body.description,
+    fire: req.body.fire,
+    water: req.body.water,
+    electricity: req.body.electricity,
+    grass: req.body.grass,
   };
-  if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
-  ) {
+  if (!req.body.name || !req.body.description) {
     res.status(400).json({ message: "Incomplete stadium." });
   } else {
     try {
       const response = await mongodb
         .getDb()
         .db()
-        .collection("stadiums")
+        .collection("stadium")
         .insertOne(newStadium);
       if (response.acknowledged) {
         res.setHeader("Content-Type", "application/json");
@@ -76,22 +67,13 @@ const createNew = async (req, res, next) => {
 const updateStadium = async (req, res, next) => {
   const updatedStadium = {
     name: req.body.name,
-    number: req.body.number,
-    type: req.body.type,
-    abilities: req.body.abilities,
-    stats: req.body.stats,
-    evolutions: req.body.evolutions,
-    moves: req.body.moves,
+    description: req.body.description,
+    fire: req.body.fire,
+    water: req.body.water,
+    electricity: req.body.electricity,
+    grass: req.body.grass,
   };
-  if (
-    !req.body.name ||
-    !req.body.number ||
-    !req.body.type ||
-    !req.body.abilities ||
-    !req.body.stats ||
-    !req.body.evolutions ||
-    !req.body.moves
-  ) {
+  if (!req.body.name || !req.body.description) {
     res.status(400).json({ message: "Incomplete stadium." });
   } else {
     try {
@@ -99,7 +81,7 @@ const updateStadium = async (req, res, next) => {
       const response = await mongodb
         .getDb()
         .db()
-        .collection("stadiums")
+        .collection("stadium")
         .replaceOne({ _id: stadiumId }, updatedStadium);
       if (response.acknowledged) {
         res.setHeader("Content-Type", "application/json");
@@ -118,7 +100,7 @@ const deleteStadium = async (req, res, next) => {
     const response = await mongodb
       .getDb()
       .db()
-      .collection("stadiums")
+      .collection("stadium")
       .deleteOne({ _id: stadiumId });
     if (response.acknowledged) {
       res.setHeader("Content-Type", "application/json");

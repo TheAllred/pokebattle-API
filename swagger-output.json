@@ -5,9 +5,12 @@
     "description": "API to simulate Pokemon battles.",
     "version": "1.0.0"
   },
-  "host": "https://pokebattleapi.onrender.com",
+  "host": "pokebattleapi.onrender.com/",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": [
+    "http",
+    "https"
+  ],
   "paths": {
     "/api-docs": {
       "get": {
@@ -19,10 +22,19 @@
     "/profile": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -30,7 +42,9 @@
     "/pokemon/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -45,7 +59,9 @@
     "/pokemon/{name}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -67,7 +83,9 @@
     "/pokemon/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -119,7 +137,9 @@
     "/pokemon/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -177,7 +197,9 @@
     "/pokemon/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -199,7 +221,9 @@
     "/players/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -214,7 +238,9 @@
     "/players/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -233,59 +259,12 @@
         }
       }
     },
-    "/players/new": {
-      "post": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "number": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "abilities": {
-                  "example": "any"
-                },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/players/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -302,22 +281,10 @@
                 "name": {
                   "example": "any"
                 },
-                "number": {
+                "picture": {
                   "example": "any"
                 },
-                "type": {
-                  "example": "any"
-                },
-                "abilities": {
-                  "example": "any"
-                },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "email": {
                   "example": "any"
                 }
               }
@@ -340,7 +307,9 @@
     "/players/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -362,7 +331,9 @@
     "/benches/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -377,7 +348,9 @@
     "/benches/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -396,9 +369,36 @@
         }
       }
     },
+    "/benches/byOwner/{email}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/benches/new": {
       "post": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -423,8 +423,14 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Created"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -432,7 +438,9 @@
     "/benches/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -446,25 +454,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "inPlay": {
                   "example": "any"
                 },
-                "number": {
+                "pokemon1": {
                   "example": "any"
                 },
-                "type": {
+                "pokemon2": {
                   "example": "any"
                 },
-                "abilities": {
+                "pokemon3": {
                   "example": "any"
                 },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "pokemon4": {
                   "example": "any"
                 }
               }
@@ -487,7 +489,9 @@
     "/benches/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -509,7 +513,9 @@
     "/stadiums/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -524,7 +530,9 @@
     "/stadiums/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -546,7 +554,9 @@
     "/stadiums/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -557,22 +567,19 @@
                 "name": {
                   "example": "any"
                 },
-                "number": {
+                "description": {
                   "example": "any"
                 },
-                "type": {
+                "fire": {
                   "example": "any"
                 },
-                "abilities": {
+                "water": {
                   "example": "any"
                 },
-                "stats": {
+                "electricity": {
                   "example": "any"
                 },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "grass": {
                   "example": "any"
                 }
               }
@@ -595,7 +602,9 @@
     "/stadiums/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -612,22 +621,19 @@
                 "name": {
                   "example": "any"
                 },
-                "number": {
+                "description": {
                   "example": "any"
                 },
-                "type": {
+                "fire": {
                   "example": "any"
                 },
-                "abilities": {
+                "water": {
                   "example": "any"
                 },
-                "stats": {
+                "electricity": {
                   "example": "any"
                 },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "grass": {
                   "example": "any"
                 }
               }
@@ -650,7 +656,9 @@
     "/stadiums/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -672,7 +680,9 @@
     "/battles/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -687,7 +697,9 @@
     "/battles/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -709,7 +721,9 @@
     "/battles/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -755,10 +769,75 @@
         }
       }
     },
+    "/battles/start": {
+      "post": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "P1BenchID": {
+                  "example": "any"
+                },
+                "P2BenchID": {
+                  "example": "any"
+                },
+                "stadium": {
+                  "example": "any"
+                },
+                "opponent": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/battles/turn/{battleID}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "battleID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/battles/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -772,25 +851,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "me": {
                   "example": "any"
                 },
-                "number": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "abilities": {
-                  "example": "any"
-                },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
+                "opponent": {
                   "example": "any"
                 }
               }
@@ -813,7 +877,9 @@
     "/battles/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",

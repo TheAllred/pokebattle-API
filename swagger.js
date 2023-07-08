@@ -5,7 +5,7 @@ const doc = {
     title: "Pokemon Battle API",
     description: "API to simulate Pokemon battles.",
   },
-  host: "localhost:3000",
+  host: "pokebattleapi.onrender.com/",
   schemes: ["http", "https"],
 };
 

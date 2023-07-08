@@ -5,6 +5,7 @@ const benchController = require("../controllers/benches");
 
 router.get("/", benchController.getAll);
 router.get("/:id", benchController.getById);
+router.get("/byOwner/:email", benchController.getBenchByOwner);
 
 router.post("/new", benchController.createNew);
 
