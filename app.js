@@ -12,7 +12,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.secret,
-  baseURL: "http://localhost:3000",
+  baseURL: "https://pokebattleapi.onrender.com",
   clientID: "mp8Z9YgtQeHbhHmga8RoW4dpWOH6gcUa",
   issuerBaseURL: "https://dev-ysgqikzna2aqfoi7.us.auth0.com",
 };
