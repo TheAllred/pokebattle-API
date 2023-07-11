@@ -23,9 +23,9 @@ console.log(process.env.baseURL);
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
   if (req.oidc.isAuthenticated()) {
-    res.redirect("http://localhost:5000");
+    res.redirect("https://pokedex-uifd.onrender.com");
   } else {
-    res.send("Logged out");
+    res.send("https://pokedex-uifd.onrender.com");
   }
   // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
