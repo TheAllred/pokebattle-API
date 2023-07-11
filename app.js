@@ -22,7 +22,12 @@ app.use(auth(config));
 console.log(process.env.baseURL);
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+  if (req.oidc.isAuthenticated()) {
+    res.redirect("http://localhost:5000");
+  } else {
+    res.send("Logged out");
+  }
+  // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
 
 app
