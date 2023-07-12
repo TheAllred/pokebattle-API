@@ -22,12 +22,12 @@ app.use(auth(config));
 console.log(process.env.baseURL);
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
-  if (req.oidc.isAuthenticated()) {
-    res.redirect("https://pokedex-uifd.onrender.com");
-  } else {
-    res.redirect("https://pokedex-uifd.onrender.com");
-  }
-  // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+  // if (req.oidc.isAuthenticated()) {
+  //   res.redirect("https://pokedex-uifd.onrender.com");
+  // } else {
+  //   res.redirect("https://pokedex-uifd.onrender.com");
+  // }
+  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
 
 app
