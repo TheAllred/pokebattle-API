@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
   if (req.oidc.isAuthenticated()) {
     res.redirect("https://pokedex-uifd.onrender.com");
   } else {
-    res.send("https://pokedex-uifd.onrender.com");
+    res.redirect("https://pokedex-uifd.onrender.com");
   }
   // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
