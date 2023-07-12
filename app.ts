@@ -23,12 +23,12 @@ console.log(process.env.baseURL);
 
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req: Request, res: Response) => {
-  if (req.oidc.isAuthenticated()) {
-    res.redirect("https://pokedex-uifd.onrender.com");
-  } else {
-    res.redirect("https://pokedex-uifd.onrender.com");
-  }
-  // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+  // if (req.oidc.isAuthenticated()) {
+  //   res.redirect("https://pokedex-uifd.onrender.com");
+  // } else {
+  //   res.redirect("https://pokedex-uifd.onrender.com");
+  // }
+  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
 
 app
@@ -48,11 +48,7 @@ app
   })
   .use("/", require("./routes"));
 
-mongodb.initDb((err: Error, mongodb: any) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port);
-    console.log(`Connected to DB and listening on ${port}`);
-  }
+mongodb.initDb(() => {
+  app.listen(port);
+  console.log(`Connected to DB and listening on ${port}`);
 });
