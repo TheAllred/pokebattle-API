@@ -5,9 +5,12 @@
     "description": "API to simulate Pokemon battles.",
     "version": "1.0.0"
   },
-  "host": "pokebattleapi.onrender.com",
+  "host": "pokebattleapi.onrender.com/",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": [
+    "http",
+    "https"
+  ],
   "paths": {
     "/api-docs": {
       "get": {
@@ -19,17 +22,10 @@
     "/profile": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -37,7 +33,9 @@
     "/pokemon/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -52,7 +50,9 @@
     "/pokemon/{name}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -74,7 +74,9 @@
     "/pokemon/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -126,7 +128,9 @@
     "/pokemon/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -184,7 +188,9 @@
     "/pokemon/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -206,7 +212,9 @@
     "/players/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -221,7 +229,9 @@
     "/players/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -243,7 +253,9 @@
     "/players/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -286,7 +298,9 @@
     "/players/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -308,7 +322,9 @@
     "/benches/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -323,7 +339,9 @@
     "/benches/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -345,7 +363,9 @@
     "/benches/byOwner/{email}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "email",
@@ -367,7 +387,9 @@
     "/benches/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -407,7 +429,9 @@
     "/benches/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -456,7 +480,9 @@
     "/benches/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -478,7 +504,9 @@
     "/stadiums/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -493,7 +521,9 @@
     "/stadiums/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -515,7 +545,9 @@
     "/stadiums/new": {
       "post": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -561,7 +593,9 @@
     "/stadiums/update/{id}": {
       "put": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -613,216 +647,9 @@
     "/stadiums/delete/{id}": {
       "delete": {
         "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "produces": [
+          "application/json"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/": {
-      "get": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/{id}": {
-      "get": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/battles/new": {
-      "post": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "number": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "abilities": {
-                  "example": "any"
-                },
-                "stats": {
-                  "example": "any"
-                },
-                "evolutions": {
-                  "example": "any"
-                },
-                "moves": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/start": {
-      "post": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "P1BenchID": {
-                  "example": "any"
-                },
-                "P2BenchID": {
-                  "example": "any"
-                },
-                "stadium": {
-                  "example": "any"
-                },
-                "opponent": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/turn/{battleID}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "battleID",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/update/{id}": {
-      "put": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "me": {
-                  "example": "any"
-                },
-                "opponent": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/battles/delete/{id}": {
-      "delete": {
-        "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
