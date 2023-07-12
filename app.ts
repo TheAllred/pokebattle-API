@@ -1,12 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongodb = require("./db/connect");
-const dotenv = require("dotenv");
+import express, { Request, Response, NextFunction } from "express";
+import bodyParser from "body-parser";
+import mongodb from "./db/connect";
+import dotenv from "dotenv";
 
 const port = process.env.PORT || 3000;
 const app = express();
 
-const { auth } = require("express-openid-connect");
+import { auth } from "express-openid-connect";
 
 const config = {
   authRequired: false,
@@ -20,8 +20,9 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 console.log(process.env.baseURL);
+
 // req.isAuthenticated is provided from the auth router
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   if (req.oidc.isAuthenticated()) {
     res.redirect("https://pokedex-uifd.onrender.com");
   } else {
@@ -32,7 +33,7 @@ app.get("/", (req, res) => {
 
 app
   .use(bodyParser.json())
-  .use((req, res, next) => {
+  .use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Headers",
@@ -47,7 +48,7 @@ app
   })
   .use("/", require("./routes"));
 
-mongodb.initDb((err, mongodb) => {
+mongodb.initDb((err: Error, mongodb: any) => {
   if (err) {
     console.log(err);
   } else {

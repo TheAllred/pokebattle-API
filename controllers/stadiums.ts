@@ -1,7 +1,8 @@
-const mongodb = require("../db/connect");
-const ObjectId = require("mongodb").ObjectId;
+import { Request, Response, NextFunction } from "express";
+import mongodb from "../db/connect";
+import { ObjectId } from "mongodb";
 
-const getAll = async (req, res, next) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await mongodb.getDb().db().collection("stadium").find();
     const lists = await result.toArray();
@@ -13,7 +14,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req: Request, res: Response, next: NextFunction) => {
   const Id = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -31,7 +32,7 @@ const getById = async (req, res, next) => {
   }
 };
 
-const createNew = async (req, res, next) => {
+const createNew = async (req: Request, res: Response, next: NextFunction) => {
   const newStadium = {
     name: req.body.name,
     description: req.body.description,
@@ -64,7 +65,11 @@ const createNew = async (req, res, next) => {
   }
 };
 
-const updateStadium = async (req, res, next) => {
+const updateStadium = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const updatedStadium = {
     name: req.body.name,
     description: req.body.description,
@@ -94,7 +99,11 @@ const updateStadium = async (req, res, next) => {
   }
 };
 
-const deleteStadium = async (req, res, next) => {
+const deleteStadium = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const stadiumId = new ObjectId(req.params.id);
     const response = await mongodb
@@ -113,4 +122,4 @@ const deleteStadium = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, createNew, updateStadium, deleteStadium };
+export { getAll, getById, createNew, updateStadium, deleteStadium };

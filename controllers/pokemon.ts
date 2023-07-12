@@ -1,20 +1,20 @@
-const mongodb = require("../db/connect");
-const ObjectId = require("mongodb").ObjectId;
+import { Request, Response, NextFunction } from "express";
+import mongodb from "../db/connect";
+import { ObjectId } from "mongodb";
 
-const getAll = async (req, res, next) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await mongodb.getDb().db().collection("pokemon").find();
     const lists = await result.toArray();
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(lists);
-    return;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to get all pokemon." });
   }
 };
 
-const getByName = async (req, res, next) => {
+const getByName = async (req: Request, res: Response, next: NextFunction) => {
   const name = req.params.name;
   console.log(name);
   const result = await mongodb
@@ -33,7 +33,7 @@ const getByName = async (req, res, next) => {
   }
 };
 
-const createNew = async (req, res, next) => {
+const createNew = async (req: Request, res: Response, next: NextFunction) => {
   const newPokemon = {
     name: req.body.name,
     type: req.body.type,
@@ -77,7 +77,11 @@ const createNew = async (req, res, next) => {
   }
 };
 
-const updatePokemon = async (req, res, next) => {
+const updatePokemon = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const updatedPokemon = {
     name: req.body.name,
     type: req.body.type,
@@ -118,7 +122,11 @@ const updatePokemon = async (req, res, next) => {
   }
 };
 
-const deletePokemon = async (req, res, next) => {
+const deletePokemon = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const pokemonId = new ObjectId(req.params.id);
     const response = await mongodb
@@ -137,4 +145,4 @@ const deletePokemon = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getByName, createNew, updatePokemon, deletePokemon };
+export { getAll, getByName, createNew, updatePokemon, deletePokemon };

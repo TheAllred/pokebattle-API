@@ -1,4 +1,4 @@
-const swaggerAutogen = require("swagger-autogen")();
+import swaggerAutogen from "swagger-autogen";
 
 const doc = {
   info: {
@@ -10,10 +10,10 @@ const doc = {
 };
 
 const outputFile = "./swagger-output.json";
-const endpointsFiles = ["./routes/index.js"];
+const endpointsFiles = ["./routes/index.ts"];
 
 /* NOTE: if you use the express Router, you must pass in the 
    'endpointsFiles' only the root file where the route starts,
-   such as index.js, app.js, routes.js, ... */
+   such as index.ts, app.ts, routes.ts, ... */
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

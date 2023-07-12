@@ -1,7 +1,8 @@
-const mongodb = require("../db/connect");
-const ObjectId = require("mongodb").ObjectId;
+import { Request, Response, NextFunction } from "express";
+import mongodb from "../db/connect";
+import { ObjectId } from "mongodb";
 
-const getAll = async (req, res, next) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await mongodb.getDb().db().collection("battle").find();
     const lists = await result.toArray();
@@ -13,7 +14,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req: Request, res: Response, next: NextFunction) => {
   const Id = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -31,7 +32,7 @@ const getById = async (req, res, next) => {
   }
 };
 
-const createNew = async (req, res, next) => {
+const createNew = async (req: Request, res: Response, next: NextFunction) => {
   const newBattle = {
     name: req.body.name,
     number: req.body.number,
@@ -73,7 +74,11 @@ const createNew = async (req, res, next) => {
   }
 };
 
-const startNewBattle = async (req, res, next) => {
+const startNewBattle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const player1_bench_ID = new ObjectId(req.body.P1BenchID);
   const player2_bench_ID = new ObjectId(req.body.P2BenchID);
   const player1_bench_raw = await mongodb
@@ -136,7 +141,7 @@ const startNewBattle = async (req, res, next) => {
   }
 };
 
-const listTurn = async (req, res) => {
+const listTurn = async (req: Request, res: Response) => {
   const battleID = new ObjectId(req.params.battleID);
   const DBresult = await mongodb
     .getDb()
@@ -172,11 +177,15 @@ const listTurn = async (req, res) => {
   }
 };
 
-const executeTurn = async (req, res) => {
+const executeTurn = async (req: Request, res: Response) => {
   const battleID = new ObjectId(req.params.battleID);
 };
 
-const updateBattle = async (req, res, next) => {
+const updateBattle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const updatedBattle = {
     player1: req.body.me,
     player2: req.body.opponent,
@@ -213,7 +222,11 @@ const updateBattle = async (req, res, next) => {
   }
 };
 
-const deleteBattle = async (req, res, next) => {
+const deleteBattle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const battleId = new ObjectId(req.params.id);
     const response = await mongodb

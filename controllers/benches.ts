@@ -1,7 +1,8 @@
-const mongodb = require("../db/connect");
-const ObjectId = require("mongodb").ObjectId;
+import { Request, Response, NextFunction } from "express";
+import mongodb from "../db/connect";
+import { ObjectId } from "mongodb";
 
-const getAll = async (req, res, next) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await mongodb.getDb().db().collection("benches").find();
     const lists = await result.toArray();
@@ -13,7 +14,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req: Request, res: Response, next: NextFunction) => {
   const Id = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -31,7 +32,11 @@ const getById = async (req, res, next) => {
   }
 };
 
-const getBenchByOwner = async (req, res, next) => {
+const getBenchByOwner = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const email = req.params.email;
   console.log(email);
   const result = await mongodb
@@ -49,7 +54,7 @@ const getBenchByOwner = async (req, res, next) => {
   }
 };
 
-const createNew = async (req, res, next) => {
+const createNew = async (req: Request, res: Response, next: NextFunction) => {
   const result = await mongodb.getDb().db().collection("pokemon").find();
   const pokemon = await result.toArray();
   // {
@@ -99,7 +104,9 @@ const createNew = async (req, res, next) => {
   }
 };
 
-const updateBench = async (req, res, next) => {
+const updateBench = async (req: Request, res: Response, next: NextFunction) => {
+  const result = await mongodb.getDb().db().collection("pokemon").find();
+  const pokemon = await result.toArray();
   const updatedBench = {
     owner: req.oidc.user.email,
     inPlay: req.body.inPlay,
@@ -111,10 +118,10 @@ const updateBench = async (req, res, next) => {
     },
   };
   if (
-    !newBench.bench.pokemon1 ||
-    !newBench.bench.pokemon2 ||
-    !newBench.bench.pokemon3 ||
-    !newBench.bench.pokemon4 ||
+    !updatedBench.bench.pokemon1 ||
+    !updatedBench.bench.pokemon2 ||
+    !updatedBench.bench.pokemon3 ||
+    !updatedBench.bench.pokemon4 ||
     !req.oidc.user.email ||
     !req.oidc.user.inPlay
   ) {
@@ -138,7 +145,7 @@ const updateBench = async (req, res, next) => {
   }
 };
 
-const deleteBench = async (req, res, next) => {
+const deleteBench = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const BenchId = new ObjectId(req.params.id);
     const response = await mongodb

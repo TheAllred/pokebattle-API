@@ -1,7 +1,8 @@
-const mongodb = require("../db/connect");
-const ObjectId = require("mongodb").ObjectId;
+import { Request, Response, NextFunction } from "express";
+import mongodb from "../db/connect";
+import { ObjectId } from "mongodb";
 
-const getAll = async (req, res, next) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await mongodb.getDb().db().collection("player").find();
     const lists = await result.toArray();
@@ -13,7 +14,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getById = async (req: Request, res: Response, next: NextFunction) => {
   const Id = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -31,7 +32,11 @@ const getById = async (req, res, next) => {
   }
 };
 
-const updatePlayer = async (req, res, next) => {
+const updatePlayer = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const updatedPlayer = {
     name: req.body.name,
     picture: req.body.picture,
@@ -58,7 +63,11 @@ const updatePlayer = async (req, res, next) => {
   }
 };
 
-const deletePlayer = async (req, res, next) => {
+const deletePlayer = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const playerId = new ObjectId(req.params.id);
     const response = await mongodb
@@ -77,8 +86,8 @@ const deletePlayer = async (req, res, next) => {
   }
 };
 
-const buildProfile = async (req, res) => {
-  let user = {};
+const buildProfile = async (req: Request, res: Response) => {
+  let user: any = {};
   user = req.oidc.user;
   console.log(user);
   if (user.email) {
@@ -122,10 +131,4 @@ const buildProfile = async (req, res) => {
   }
 };
 
-module.exports = {
-  getAll,
-  getById,
-  updatePlayer,
-  deletePlayer,
-  buildProfile,
-};
+export { getAll, getById, updatePlayer, deletePlayer, buildProfile };
