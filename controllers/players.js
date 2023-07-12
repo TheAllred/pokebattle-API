@@ -49,7 +49,7 @@ const updatePlayer = async (req, res, next) => {
         .replaceOne({ _id: playerId }, updatedPlayer);
       if (response.acknowledged) {
         res.setHeader("Content-Type", "application/json");
-        res.status(204).json(response);
+        res.status(200).json(response);
       }
     } catch (error) {
       console.error(error);
