@@ -23,11 +23,21 @@ console.log(process.env.baseURL);
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
   if (req.oidc.isAuthenticated()) {
-    res.redirect("https://pokedex-uifd.onrender.com");
+    // Encode the email and picture parameters
+    var email = encodeURIComponent(req.oidc.user.email);
+    var picture = encodeURIComponent(req.oidc.user.picture);
+
+    // Create the URL with encoded parameters
+    var url =
+      "https://pokedex-uifd.onrender.com/pokedex.html" +
+      "?email=" +
+      email +
+      "&picture=" +
+      picture;
+    res.redirect(url);
   } else {
     res.redirect("https://pokedex-uifd.onrender.com");
   }
-  // res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
 
 app
