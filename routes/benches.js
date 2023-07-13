@@ -7,7 +7,7 @@ router.get("/", benchController.getAll);
 router.get("/:id", benchController.getById);
 router.get("/byOwner/:email", benchController.getBenchByOwner);
 
-router.post("/new", requiresAuth(), benchController.createNew);
+router.post("/new", benchController.createNew);
 
 router.put("/update/:id", benchController.updateBench);
 
